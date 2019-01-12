@@ -13,7 +13,7 @@ class App extends Component {
           </p>
           <a
             className="App-link"
-            href="https://reactjs.org"
+            href="https://www.spotify.com/us/"
             target="_blank"
             rel="noopener noreferrer"
           >
