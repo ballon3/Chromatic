@@ -46,7 +46,7 @@ def wrkSpace(url_slug):
 
     space_id = c.Space.find_by_url(url)
 
-    print space_id
+    print(space_id)
 
 wrkSpace(url_n)
 
@@ -137,6 +137,7 @@ def getFields(idx):
                 fapps['type'] = tp
                 ags_apps['fields'] = fapps
 
+                pass
             
             elif typ == 'category':
                 rtyp = i['config']['settings']['options']
@@ -150,6 +151,8 @@ def getFields(idx):
                 fapps['label'] = lb
                 fapps['type'] = { 'category': lst}
                 ags_apps['fields'] = fapps
+
+                pass
 
 
             elif typ == 'app':
@@ -166,6 +169,8 @@ def getFields(idx):
                 fapps['type'] = app_str
                 ags_apps['fields'] = fapps
 
+                pass
+
             
             else:
                 lb = label.encode('utf-8')
@@ -173,10 +178,11 @@ def getFields(idx):
                 fapps['field_id'] = fid
                 fapps['label'] = lb
                 fapps['type'] = tp
-         
                 ags_apps['fields'] = fapps
-            cats.append()
-        apps.append(ags_apps)
+                pass
+            
+            cats.append(fapps)
+    apps.append(cats)
     
     print json.dumps(apps, indent=4, sort_keys=True)
     

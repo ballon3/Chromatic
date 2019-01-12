@@ -1,8 +1,10 @@
 {
-  "fields": {
+  "app": "appointments",
+  "fields": [
+    {
     "type": "text", 
     "field_id": 168274028, 
     "label": "-"
-  }, 
-  "app": "appointments"
+   }
+  ]
 }
