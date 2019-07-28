@@ -3,7 +3,7 @@ import graphene
 class Queries(
     graphene.ObjectType
 ):
-    dummy = graphene.String()
+    booking = graphene.String()
 
 
 schema = graphene.Schema(query=Queries)

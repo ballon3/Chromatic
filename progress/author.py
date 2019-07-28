@@ -1,6 +1,7 @@
 import json 
 
 json_obj = """
+
 {
   "app": "appointments",
   "fields": [
@@ -16,6 +17,7 @@ json_obj = """
    }
   ]
 }
+
 """
 d = json.loads(json_obj)
 f = d['fields']
@@ -23,7 +25,7 @@ f = d['fields']
 x = d['app']
 
 
-def author(data):
+def author(object):
     with open('check.py', 'a') as f:
         
         fields = data['fields']
@@ -49,5 +51,11 @@ def author(data):
         s.write('\n')
 
 
+def podioAuthor(data):
+    for i in data:
+        author(data)
+
 
 author(d)
+
+14 hr - 

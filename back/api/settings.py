@@ -44,6 +44,10 @@ INSTALLED_APPS = [
 
 GRAPHENE = {
     'SCHEMA': 'api.schema.schema',
+    'SCHEMA': 'business.schema.schema',
+    'SCHEMA': 'influencer.schema.schema',
+    'SCHEMA': 'booking.schema.schema',
+    'SCHEMA': 'offer.schema.schema' 
 }
 
 MIDDLEWARE = [

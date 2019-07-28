@@ -7,7 +7,7 @@ import os
 cwd = os.getcwd() 
 
 podio_string = '''
-{
+'apps': {
     "app_name":null,
     "app_id":null,
     "fields":[
@@ -72,24 +72,21 @@ print d
 path = './'
 fileName = 'develop'
 
+json_string = """
+{
 
+    "app": "app_name",
+    "fields": [
+        {
+            "type": "text", 
+            "field_id": 268274028, 
+            "label": "points"
+        }
+    ]
 
-
-def json_handler(fname, data):
-    t = []
-    if not os.path.isfile(fname):
-        t.append(data)
-        with open(fname, mode='w') as f:
-            f.write(json.dumps(data, indent=2))
-    else:
-        with open(fname) as feedsjson:
-            feeds = json.load(feedsjson)
-
-        feeds.append(data)
-        with open(fname, mode='w') as f:
-            f.write(json.dumps(feeds, indent=2))
-
-
+}
+"""
+data = json.loads(json_string)
 
 
 def getFields(idx):
@@ -97,22 +94,26 @@ def getFields(idx):
     #resp = c.Application.get_items(idx)
     #nx = json.loads(raw)
     print idx
-    apps = []
+ 
+    json_string = """
+    {
+
+        "app": "app_name",
+        "fields": [
+            {
+                "type": "text", 
+                "field_id": 268274028, 
+                "label": "points"
+            }
+        ]
+
+    }
+    """
+    data = json.loads(json_string)
+
     for a in idx:
         print a
-                
-        types = []
-        flabels = []
-        fids = []
-        fapps = {}
-        lapps = {}
-        oapps = {}
-        capps = {}
-        aapps = {}
 
-
-
-        
         ags_apps = {}
         
         esp = c.Application.find(a)
@@ -120,26 +121,33 @@ def getFields(idx):
         nfm = len(nx)
         
         d = esp['url_label']
-        ags_apps['app'] = d
+
+        data.update(app: d)
+        data.update(fields: [])
+        print data
+        #ags_apps['app'] = d
         print d
         print nfm
         cats = []
 
         for i in nx:
-            
+
             label = i['label']
             typ = i['type']
             fid = i['field_id']
+
+            lb = label.encode('utf-8')
             
+            #fapps['field_id'].append(fid)
+            #fapps['label'].append(lb)
+
+
+
 
             if typ == 'calculation':
                 rtyp = i['config']['settings']['return_type']
-                lb = label.encode('utf-8')
                 tp = rtyp.encode('utf-8')
-                lapps['field_id'] = fid
-                lapps['label'] = lb
-                lapps['type'] = tp
-                cats.append(lapps)
+                tp = fapps['type']
 
             elif typ == 'category':
                 rtyp = i['config']['settings']['options']
@@ -148,38 +156,29 @@ def getFields(idx):
                     h = i['text'].encode('utf-8')
                     lst.append(h)
                 
-                lb = label.encode('utf-8')
-                capps['field_id'] = fid
-                capps['label'] = lb
-                capps['type'] = { 'category': lst}
-                cats.append(capps)
-
-
+      
+                fapps['type'] = { 'category': lst}
 
             elif typ == 'app':
                 rtyp = i['config']['settings']['apps']
-                lst = []
                 for i in rtyp:
-                    x = i['name'].encode('utf-8')
-                    
+                    x = i['name'].encode('utf-8') 
                     app_str = typ.encode('utf-8')+": "+x
                     #lst.append()
-                lb = label.encode('utf-8')
-                aapps['field_id'] = fid
-                aapps['label'] = lb
-                aapps['type'] = app_str
-                cats.append(aapps)
-
             
+                app_str = fapps['type']
+                pass
+
             else:
-                lb = label.encode('utf-8')
-                tp = typ.encode('utf-8')
-                oapps['field_id'] = fid
-                oapps['label'] = lb
-                oapps['type'] = tp
-                cats.append(oapps)
-    print cats
+                tp = fapps['type'] 
+                pass 
         
+            cats.append(fapps)
+            
+            
+        ags_apps['fields'] = cats
+        
+    print(cats)
         
 getFields(d)
 
