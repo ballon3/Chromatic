@@ -37,8 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    'rest_framework',
+    'corsheaders',
     'graphene_django',
+    
+    'pods',
+    'users',
 
 ]
 
@@ -46,6 +50,7 @@ GRAPHENE = {
     'SCHEMA': 'api.schema.schema',
 
 }
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -55,7 +60,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'graphql_jwt.middleware.JSONWebTokenMiddleware',
 ]
+
 
 ROOT_URLCONF = 'api.urls'
 
@@ -107,6 +114,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'graphql_jwt.backends.JSONWebTokenBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
