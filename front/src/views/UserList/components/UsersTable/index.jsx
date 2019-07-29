@@ -89,7 +89,8 @@ class UsersTable extends Component {
   };
 
   render() {
-    const { classes, className, users } = this.props;
+    const { classes, className } = this.props;
+    const { }
     const { activeTab, selectedUsers, rowsPerPage, page } = this.state;
 
     const rootClassName = classNames(classes.root, className);
@@ -169,15 +170,7 @@ class UsersTable extends Component {
                       <TableCell className={classes.tableCell}>
                         {user.id}
                       </TableCell>
-                      <TableCell className={classes.tableCell}>
-                        {user.address.state}
-                      </TableCell>
-                      <TableCell className={classes.tableCell}>
-                        {user.phone}
-                      </TableCell>
-                      <TableCell className={classes.tableCell}>
-                        {moment(user.createdAt).format('DD/MM/YYYY')}
-                      </TableCell>
+
                     </TableRow>
                   ))}
               </TableBody>

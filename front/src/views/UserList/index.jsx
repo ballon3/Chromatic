@@ -20,9 +20,24 @@ import { UsersToolbar, UsersTable } from './components';
 
 // Component styles
 import styles from './style';
+import gql from 'graphql-tag';
+
+import { graphql } from 'react-apollo';
+import {Query} from 'react-apollo';
+
+const GET_U = gql`
+{
+  users {
+    id
+    username
+    email
+  }
+}`;
 
 class UserList extends Component {
   signal = true;
+
+
 
   state = {
     isLoading: false,
@@ -39,6 +54,7 @@ class UserList extends Component {
       const { limit } = this.state;
 
       const { users } = await getUsers(limit);
+
 
       if (this.signal) {
         this.setState({
@@ -101,7 +117,8 @@ class UserList extends Component {
   render() {
     const { classes } = this.props;
     const { selectedUsers } = this.state;
-
+    const { data } = this.props;
+    
     return (
       <DashboardLayout title="Users">
         <div className={classes.root}>
